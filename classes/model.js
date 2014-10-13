@@ -2,9 +2,12 @@ var mongoose = require('mongoose');
 var apn = require('apn');
 var send_push = require('../classes/push_sender');
 var error = require('../classes/error');
+var utils = require('../classes/utils');
+var gallery = require('../classes/gallery');
+
 var fs = require('fs');
-//mongoose.connect("mongodb://iAmUser:iAmStudio1@ds053638.mongolab.com:53638/eventos");
-mongoose.connect("mongodb://iAmUser:iAmStudio1@ds027450-a0.mongolab.com:27450/dbcaracoltv");
+mongoose.connect("mongodb://iAmUser:iAmStudio1@ds053638.mongolab.com:53638/eventos");
+//mongoose.connect("mongodb://iAmUser:iAmStudio1@ds027450-a0.mongolab.com:27450/dbcaracoltv");
 var express = require('express');
 var image_url_prefix = "http://caracol.aws.af.cm/images/";
 var knox = require('knox');
@@ -64,6 +67,14 @@ var AtomSchema= new mongoose.Schema({
 	short_detail: {type: String, required:false, unique:false,},
 	location_id: {type: String, required:false, unique:false,},
 	image_url: {type: Array, required:false, unique:false,},
+	image_url1: {type: String, required:false, unique:false,},
+	image_url2: {type: String, required:false, unique:false,},
+	image_url3: {type: String, required:false, unique:false,},
+	image_url4: {type: String, required:false, unique:false,},
+	image_url5: {type: String, required:false, unique:false,},
+
+	gallery: {type: Array, required:false, unique:false,},
+
 	thumb_url: {type: String, required:false, unique:false,},
 	category_id: {type: String, required:false, unique:false,},
 	category_list: {type: Array, required:false, unique:false,},
@@ -191,20 +202,21 @@ var PushSchema= new mongoose.Schema({
 var static_priority=1;
 
 //DEV AMAZON BUCKET
-/*
+//Development AMAZON BUCKET
 var client = knox.createClient({
-    key: 'AKIAI3QBUNZG5R76VD3A'
-  , secret: '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'
-  , bucket: 'Caracol'
+    key: 'AKIAJ32JCWGUBJ3BWFVA'
+  , secret: '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'
+  , bucket: 'eventosc1'
 });
-*/
 
 //PRODUCTION AMAZON BUCKET
+/*
 var client = knox.createClient({
     key: 'AKIAJNHMEXKKOP3TJXLA'
   , secret: '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'
   , bucket: 'eventoscaracol-assets'
 });
+*/
 
 var types = ['artistas','eventos','noticias','locaciones','general','home','favoritos','configuracion'];
 //////////////////////////////////
@@ -394,6 +406,15 @@ exports.createAtom = function(req,res){
 			else{		
 				uploadImage(req.files.image_url,atom,"atom_image");
 		    	uploadImage(req.files.thumb_url,atom,"atom_thumb");
+		    	
+		    	//Gallery upload
+		    	uploadImage(req.files.image_url1,atom,"atom_image1");
+		    	uploadImage(req.files.image_url2,atom,"atom_image2");
+		    	uploadImage(req.files.image_url3,atom,"atom_image3");
+		    	uploadImage(req.files.image_url4,atom,"atom_image4");
+		    	uploadImage(req.files.image_url5,atom,"atom_image5");
+		    	//End Gallery upload
+		    	
 				res.format({			
 					html: function () { res.redirect('/ItemDashboard/'+req.body.menu_item_id+'/'+req.body.app_id+'/'+req.body.admin_id); },
 					json: function () { res.send(atom); },
@@ -479,6 +500,15 @@ var event_time= req.body.event_time? req.body.event_time:req.body.previous_event
 		else{
 			uploadImage(req.files.image_url,atom,"atom_image");
 		    uploadImage(req.files.thumb_url,atom,"atom_thumb");
+		    
+		    //Gallery upload
+		    	uploadImage(req.files.image_url1,atom,"atom_image1");
+		    	uploadImage(req.files.image_url2,atom,"atom_image2");
+		    	uploadImage(req.files.image_url3,atom,"atom_image3");
+		    	uploadImage(req.files.image_url4,atom,"atom_image4");
+		    	uploadImage(req.files.image_url5,atom,"atom_image5");
+		    //End Gallery upload
+		    	
 			res.format({			
 				html:function(){res.redirect('/ItemDashboard/'+req.body.menu_item_id+'/'+req.body.app_id+'/'+req.body.admin_id);},
 				json:function(){res.send(atom); },
@@ -565,6 +595,53 @@ function uploadImage(file,object,type){
 											}
 										});
 									}
+									
+									else if(type=="atom_image1"){
+										Atom.findOneAndUpdate({_id:object._id},{$set:{image_url1:entry}}, function(err,atom){
+											if(!atom){
+											}
+											else{
+												console.log("success gallery 1!");
+											}
+										});
+									}
+									else if(type=="atom_image2"){
+										Atom.findOneAndUpdate({_id:object._id},{$set:{image_url2:entry}}, function(err,atom){
+											if(!atom){
+											}
+											else{
+												console.log("success gallery 1!");
+											}
+										});
+									}
+									else if(type=="atom_image3"){
+										Atom.findOneAndUpdate({_id:object._id},{$set:{image_url3:entry}}, function(err,atom){
+											if(!atom){
+											}
+											else{
+												console.log("success gallery 1!");
+											}
+										});
+									}
+									else if(type=="atom_image4"){
+										Atom.findOneAndUpdate({_id:object._id},{$set:{image_url4:entry}}, function(err,atom){
+											if(!atom){
+											}
+											else{
+												console.log("success gallery 1!");
+											}
+										});
+									}
+									else if(type=="atom_image5"){
+										Atom.findOneAndUpdate({_id:object._id},{$set:{image_url5:entry}}, function(err,atom){
+											if(!atom){
+											}
+											else{
+												console.log("success gallery 1!");
+											}
+										});
+									}
+									
 									else if(type=="location_image"){
 										Location.findOneAndUpdate({_id:object._id},{$set:{image_url:entry}}, function(err,location){
 											if(!location){
@@ -2046,17 +2123,23 @@ exports.getAllInfoWithAppID = function(req,res){
 													var featured= new Array();
 													var special = new Array();
 													
+													
+													
 													for(var i=0;i<atoms.length;i++){
 															if(atoms[i].type=="artistas"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																artists.push(atoms[i]);
 															}
 															else if(atoms[i].type=="eventos"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																events.push(atoms[i]);
 															}
 															else if(atoms[i].type=="noticias"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																news.push(atoms[i]);
 															}
 															else if(atoms[i].type=="general"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																general.push(atoms[i]);
 															}
 													}
@@ -2142,17 +2225,22 @@ exports.getAllInfoWithAppAndUser = function(req,res){
 													var featured = new Array();
 													var special = new Array();
 													
+													
 													for(var i=0;i<atoms.length;i++){
 															if(atoms[i].type=="artistas"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																artists.push(atoms[i]);
 															}
 															else if(atoms[i].type=="eventos"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																events.push(atoms[i]);
 															}
 															else if(atoms[i].type=="noticias"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																news.push(atoms[i]);
 															}
 															else if(atoms[i].type=="general"){
+																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																general.push(atoms[i]);
 															}
 													}
@@ -2330,6 +2418,7 @@ exports.getAtomWithID = function(req,res){
 			res.json({response:"no item found with id "+req.params.atom_id, status:false, error:err});
 		}	
 		else{
+			atom.gallery = gallery.gallery_array(atom);
 			res.json({response:"Atom successfully found", status:true, error:err, atom:atom});
 		}
 	});
@@ -2390,6 +2479,7 @@ exports.getFavoritedItemsFromUser = function(req,res){
 		else{
 			Location.find({_id:{$in:user.favorited_locations}, app_id:req.params.app_id}, function(err,locations){
 				Atom.find({_id:{$in:user.favorited_atoms}, app_id:req.params.app_id}, function(err,atoms){
+					
 					res.json({response:"Success", 
 							  status:true, 
 							  favorited_atoms:atoms, 

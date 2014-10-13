@@ -333,6 +333,12 @@ form{
 #upload_preview img{
 	width: 230px;
 }
+img[src=""] {
+   display: none;
+}
+img{
+   display: none;
+}
 #back{
 	color:#ff0c8a;
 	margin:0 auto;

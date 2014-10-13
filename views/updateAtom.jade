@@ -71,6 +71,49 @@ include head
 				label(for='youtube_url') ID de video de Youtube:
 				p
 				input(class="input_textfield",type='text',name='youtube_url',id='youtube_url',value="#{atom.youtube_url}")
+				p
+				//gallery
+				label(for='image_url') Galería:
+				
+				br
+				span(style="color:#ff0c8a; font-size:10px;") (Max 800px x 600px):
+				p
+				input(class="file_input",type="file", id="image_url1", name="image_url1", value="no", style="width:230px;")
+				#upload_preview
+					img(src="#{atom.image_url1}")
+				p
+				
+				br
+				span(style="color:#ff0c8a; font-size:10px;") (Max 800px x 600px):
+				p
+				input(class="file_input",type="file", id="image_url2", name="image_url2", value="no", style="width:230px;")
+				#upload_preview
+					img(src="#{atom.image_url2}")
+				p
+				
+				br
+				span(style="color:#ff0c8a; font-size:10px;") (Max 800px x 600px):
+				p
+				input(class="file_input",type="file", id="image_url3", name="image_url3", value="no", style="width:230px;")
+				#upload_preview
+					img(src="#{atom.image_url3}")
+				p
+				
+				br
+				span(style="color:#ff0c8a; font-size:10px;") (Max 800px x 600px):
+				p
+				input(class="file_input",type="file", id="image_url4", name="image_url4", value="no", style="width:230px;")
+				#upload_preview
+					img(src="#{atom.image_url4}")
+				p
+				
+				br
+				span(style="color:#ff0c8a; font-size:10px;") (Max 800px x 600px):
+				p
+				input(class="file_input",type="file", id="image_url5", name="image_url5", value="no", style="width:230px;")
+				#upload_preview
+					img(src="#{atom.image_url5}")
+				p
 			p
 			-if(menuItem.type=="eventos")
 				-var date=new Date(atom.event_time);
