@@ -6,8 +6,8 @@ var utils = require('../classes/utils');
 var gallery = require('../classes/gallery');
 
 var fs = require('fs');
-mongoose.connect("mongodb://iAmUser:iAmStudio1@ds053638.mongolab.com:53638/eventos");
-//mongoose.connect("mongodb://iAmUser:iAmStudio1@ds027450-a0.mongolab.com:27450/dbcaracoltv");
+//mongoose.connect("mongodb://iAmUser:iAmStudio1@ds053638.mongolab.com:53638/eventos");
+mongoose.connect("mongodb://iAmUser:iAmStudio1@ds027450-a0.mongolab.com:27450/dbcaracoltv");
 var express = require('express');
 var image_url_prefix = "http://caracol.aws.af.cm/images/";
 var knox = require('knox');
@@ -203,20 +203,20 @@ var static_priority=1;
 
 //DEV AMAZON BUCKET
 //Development AMAZON BUCKET
+/*
 var client = knox.createClient({
     key: 'AKIAJ32JCWGUBJ3BWFVA'
   , secret: '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'
   , bucket: 'eventosc1'
 });
+*/
 
 //PRODUCTION AMAZON BUCKET
-/*
 var client = knox.createClient({
     key: 'AKIAJNHMEXKKOP3TJXLA'
   , secret: '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'
   , bucket: 'eventoscaracol-assets'
 });
-*/
 
 var types = ['artistas','eventos','noticias','locaciones','general','home','favoritos','configuracion'];
 //////////////////////////////////
