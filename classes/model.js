@@ -366,13 +366,15 @@ exports.createAtom = function(req,res){
 	event_time.setHours(event_time.getHours() + 5);
 	
 		var id_array = new Array();
-		if(req.body.category instanceof Array){
-			for(var i=0;i<req.body.category.length;i++){
-				id_array.push(JSON.parse(req.body.category[i]));
+		if(req.body.category){
+			if(req.body.category instanceof Array){
+				for(var i=0;i<req.body.category.length;i++){
+					id_array.push(JSON.parse(req.body.category[i]));
+				}
 			}
-		}
-		else{
-			id_array.push(JSON.parse(req.body.category));
+			else{
+				id_array.push(JSON.parse(req.body.category));
+			}
 		}
 
 		new Atom({
@@ -460,13 +462,15 @@ var event_time= req.body.event_time? req.body.event_time:req.body.previous_event
 	}
 	console.log("hora update "+event_time+" date: "+req.body.event_time);
 	var id_array = new Array();
-	if(req.body.category instanceof Array){
-		for(var i=0;i<req.body.category.length;i++){
-			id_array.push(JSON.parse(req.body.category[i]));
+	if(req.body.category){
+		if(req.body.category instanceof Array){
+			for(var i=0;i<req.body.category.length;i++){
+				id_array.push(JSON.parse(req.body.category[i]));
+			}
 		}
-	}
-	else{
-		id_array.push(JSON.parse(req.body.category));
+		else{
+			id_array.push(JSON.parse(req.body.category));
+		}
 	}
 	Atom.findOneAndUpdate({_id:req.body.atom_id},
 	   {$set:{name:req.body.name,
@@ -2091,7 +2095,7 @@ exports.getAllInfoWithAppID = function(req,res){
 		else{
 			MenuItem.find({app_id:req.params.app_id}, null,{sort:{priority:static_priority}}, function(err,menuItems){
 				if(menuItems.length<=0){
-					res.json({response:"Application found, but there's no menu"+req.params.app_id, status:false, error:err})
+					res.json({response:"Application found, but there's no menu. ID: "+req.params.app_id, status:false, error:err})
 				}
 				else{
 					Atom.find({app_id:req.params.app_id}, null,{sort:{priority:static_priority}}, function(err, atoms){
@@ -2146,9 +2150,11 @@ exports.getAllInfoWithAppID = function(req,res){
 													
 													for(var i=0;i<features.length;i++){
 															if(features[i].feature_type=="especial"){
+																features[i].gallery = gallery.gallery_array(atoms[i]);
 																special.push(features[i]);
 															}
 															else if(features[i].feature_type=="destacado"){
+																features[i].gallery = gallery.gallery_array(atoms[i]);
 																featured.push(features[i]);
 															}
 													}
