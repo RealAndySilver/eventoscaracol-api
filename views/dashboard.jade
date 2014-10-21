@@ -30,18 +30,18 @@ include head
 						.app_name #{app.name}
 					-if(admin.type!="admin")
 						a(href='/AdminAssigner/#{app._id}/#{super_admin_id}')
-							.app_name(style="font-size:20px; margin-top:50px;") Asignar Admin 
-								span(style="color:#ff0c8a; font-size:30px; font-weight:bold;")
+							.app_name(style="font-size:20px; margin-top:40px;") Asignar Admin 
+								
 					a(href='/AppUpdater/#{admin._id}/#{app._id}')
-						.app_name(style="font-size:20px;") Editar App 
-							span(style="color:#ff0c8a; font-size:20px; font-weight:bold;")
+						.app_name(style="font-size:18px;") Editar App 
+							
 					-if(admin.type!="admin")
 						a(href='/DeleteApp/#{app._id}/#{admin._id}', onClick="return confirm('Está seguro que desea borrar #{app.name}? Esta acción borrará todos los items asociados y no habrá manera de regresar.');")
-							.app_name(style="font-size:20px;") Borrar App 
-								span(style="color:#ff0c8a; font-size:30px; font-weight:bold;")
+							.app_name(style="font-size:18px;") Borrar App 
+								
 					a(href='/SendPushBroadcast/#{app._id}/#{admin._id}')
-						.app_name(style="font-size:20px;") Enviar Push 
-							span(style="color:#ff0c8a; font-size:30px; font-weight:bold;")
+						.app_name(style="font-size:18px;") Enviar Push 
+							
 	.clear_both
 	p
 	-if(admin.type=="superadmin")

@@ -18,9 +18,9 @@ include head
 			p
 			//label(for='apps') Asignar una aplicación:
 			//select(name="app_id_list")
-			each app, index in apps
-				option(value="#{app._id}") #{app.name}
-			p
+			//	each app, index in apps
+			//		option(value="#{app._id}") #{app.name}
+			//p
 			input(type='hidden',name='admin_id',id='admin_id',value='#{admin_id}')
 			input(type='submit',name='submit',value='Crear')
 			input(type='button',name='cancel',value='Cancelar')
