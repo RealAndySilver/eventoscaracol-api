@@ -45,10 +45,24 @@ include head
 				p
 				input(class="input_textfield",type='text',name='ios_cert_key',id='ios_cert_key', value="#{app.ios_cert_key}")
 				p
-				label(for='name') Google Api Key:
+				label(for='name') Google GCM Api Key:
 				p
 				input(class="input_textfield",type='text',name='gcm_apikey',id='gcm_apikey', value="#{app.gcm_apikey}")
 				p
+			p
+			fieldset(style="width:230px;")
+				legend Google Api Keys:
+				label(for='name') Google iOS Api Key:
+				p
+				input(class="input_textfield",type='text',name='googleios_apikey',id='googleios_apikey', value="#{app.googleios_apikey}")
+				p
+				label(for='name') Google Android Api Key:
+				p
+				input(class="input_textfield",type='text',name='googleandroid_apikey',id='googleandroid_apikey', value="#{app.googleandroid_apikey}")
+				p
+			p
+			fieldset(style="width:230px;")
+				legend Desarrollo/Producción:
 				-if(app.is_development)
 					input(type="checkbox", name="is_development", id="is_development", value="true", checked)
 				-else
