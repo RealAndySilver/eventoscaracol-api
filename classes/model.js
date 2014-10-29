@@ -126,6 +126,7 @@ var AppSchema= new mongoose.Schema({
 	gcm_apikey: {type: String,required: false,unique: false,},
 	googleios_apikey: {type: String,required: false,unique: false,},
 	googleandroid_apikey: {type: String,required: false,unique: false,},
+	google_project_number: {type: String,required: false,unique: false,},
 	is_development: {type: Boolean,required: false,unique: false,},
 	facebook_tag: {type: String,required: false,unique: false,},
 	facebook_url: {type: String,required: false,unique: false,},
@@ -871,6 +872,7 @@ exports.createApp = function(req,res){
 				gcm_apikey:req.body.gcm_apikey,
 				googleios_apikey:req.body.googleios_apikey,
 				googleandroid_apikey:req.body.googleandroid_apikey,
+				google_project_number:req.body.google_project_number,
 				is_development: req.body.is_development,
 				facebook_tag:req.body.facebook_tag,
 				facebook_url:req.body.facebook_url,
@@ -929,6 +931,7 @@ exports.updateApp = function(req,res){
 			gcm_apikey:req.body.gcm_apikey,
 			googleios_apikey:req.body.googleios_apikey,
 			googleandroid_apikey:req.body.googleandroid_apikey,
+			google_project_number:req.body.google_project_number,
 			is_development: req.body.is_development,
 			facebook_tag:req.body.facebook_tag,
 			facebook_url:req.body.facebook_url,
@@ -2617,7 +2620,6 @@ var ios = req.body.ios ? true:false;
 									        key2: 'message2'
 									    }
 									});
-									
 									var sender = new gcm.Sender(app.gcm_apikey);
 									var registrationIds = [];
 									
@@ -2716,4 +2718,14 @@ second_day = Math.floor(diff2/(1000));
 third_day = Math.floor(diff3/(1000));
 fourth_day = Math.floor(diff4/(1000));
 res.render('hiBeautiful',{title:" Hi Beautiful", first_day:first_day, second_day:second_day, third_day:third_day, fourth_day:fourth_day, messages:messages});
+};
+exports.deletePush = function(req,res){
+	Push.remove({app_id:req.params.app_id},function(err){
+		if(err){
+			res.json(error.notFound);
+		}
+		else{
+			res.json({status:true, message:"Push messages borrados exitosamente."});
+		}
+	});
 };

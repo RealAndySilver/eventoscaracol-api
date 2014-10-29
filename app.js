@@ -128,6 +128,8 @@ app.get('/DeleteAdmin/:admin_id/:super_admin_id', model.deleteAdmin);
 app.get('/DeleteMenuItem/:app_id/:admin_id/:menuItem_id/:app_name', model.deleteMenuItem);
 app.get('/DeleteLocation/:app_id/:admin_id/:location_id/:menuItem_id', model.deleteLocation);
 app.get('/DeleteItem/:app_id/:admin_id/:atom_id/:menuItem_id', model.deleteAtom);
+app.get('/DeletePushes/:app_id', model.deletePush);
+
 
 app.get('/DeleteCategory/:app_id/:admin_id/:category_id', model.deleteCategory);
 app.get('/DeleteCategoryFather/:app_id/:admin_id/:category_id', model.deleteCategoryFather);

@@ -7,6 +7,7 @@ include head
 			span(style="color:#ff0c8a;") #{admin.name}
 	.subtitle 
 		h1(style="text-align:center;") #{app.name}	
+	
 	#mid_container
 		a(href="/MenuItemCreator/#{app._id}/#{admin._id}")
 			#plus_sign +
@@ -69,3 +70,7 @@ include head
 	div(style="clear:both;")
 	a(href="/CategoryFatherDashboard/#{app._id}/#{admin._id}")
 		#category Crear/Editar Categorías 
+	.subtitle  
+		h1(style="text-align:center; font-size:12px;") 
+			span(style="text-align:center;color:#ff0c8a;") App ID: 
+			span(style="text-align:center;color:#0d9aff;") #{app._id}
