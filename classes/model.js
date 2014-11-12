@@ -2159,7 +2159,9 @@ exports.getAllInfoWithAppID = function(req,res){
 															}
 													}
 													for(var i=0;i<locations.length;i++){
-															locations[i].gallery.push(locations[i].image_url[0]);
+															if(locations[i].image_url[0]){
+																locations[i].gallery.push(locations[i].image_url[0]);
+															}
 															console.log("count "+i);
 															console.log("Location: "+locations[i]);
 													}
