@@ -2162,17 +2162,16 @@ exports.getAllInfoWithAppID = function(req,res){
 															if(locations[i].image_url[0]){
 																locations[i].gallery.push(locations[i].image_url[0]);
 															}
-															console.log("count "+i);
-															console.log("Location: "+locations[i]);
 													}
 													
 													for(var i=0;i<features.length;i++){
 															if(features[i].feature_type=="especial"){
-																features[i].gallery = gallery.gallery_array(atoms[i]);
+																features[i].gallery = gallery.gallery_array(features[i]);
 																special.push(features[i]);
 															}
 															else if(features[i].feature_type=="destacado"){
-																features[i].gallery = gallery.gallery_array(atoms[i]);
+																features[i].gallery = gallery.gallery_array(features[i]);
+																console.log("Featured: "+features[i]);
 																featured.push(features[i]);
 															}
 													}
