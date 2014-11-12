@@ -102,6 +102,9 @@ var LocationSchema= new mongoose.Schema({
 	creation_date: {type: Date, required:false, unique:false,},
 	thumb_url: {type: String, required:false, unique:false,},
 	image_url: {type: Array, required:false, unique:false,},
+	
+	gallery: {type: Array, required:false, unique:false,},
+	
 	type: {type: String, required:false, unique:false,},
 	favorited: {type: Number, required:false, unique:false,},
 	youtube_url:{type: String, required:false, unique:false,},
@@ -2137,7 +2140,6 @@ exports.getAllInfoWithAppID = function(req,res){
 													var special = new Array();
 													
 													
-													
 													for(var i=0;i<atoms.length;i++){
 															if(atoms[i].type=="artistas"){
 																atoms[i].gallery = gallery.gallery_array(atoms[i]);
@@ -2155,6 +2157,11 @@ exports.getAllInfoWithAppID = function(req,res){
 																atoms[i].gallery = gallery.gallery_array(atoms[i]);
 																general.push(atoms[i]);
 															}
+													}
+													for(var i=0;i<locations.length;i++){
+															locations[i].gallery.push(locations[i].image_url[0]);
+															console.log("count "+i);
+															console.log("Location: "+locations[i]);
 													}
 													
 													for(var i=0;i<features.length;i++){
