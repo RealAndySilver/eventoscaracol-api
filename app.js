@@ -163,9 +163,6 @@ app.get('/api_1.0/GetFavoritedItemsFromUser/:app_id/:user_id/:time', model.getFa
 app.post('/api_1.0/FavItem', model.favItem);
 app.post('/api_1.0/UnFavItem',model.unFavItem);
 
-
-app.get('/Countdown', model.hiBeautiful);
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
