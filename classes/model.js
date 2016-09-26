@@ -2672,61 +2672,6 @@ var ios = req.body.ios ? true:false;
 	});
 };
 
-exports.hiBeautiful = function(req,res){
-var travelday, today, tday, diff, days;
-travelday1 = [21,5,7];
-travelday2 = [22,8,17];
-travelday3 = [1,9,4];
-travelday4 = [1,10,15];
-
-message1 = ['To give you too many picos',
-			'To tell you how much I love you <3 (yes, again)',
-			'To let you know you are the best thing in my life',
-			'To be in another adventure with you',
-			'To eat more Bagels with you <3',
-			'Just to be with you...',
-			'To help you kill spiders ;)',
-			'To go to San Francisco!!'];
-message2 = ['To take you where you want to go!',
-			'To meet my friends',
-			'To meet my family',
-			'............ ;)', 
-			'To know new places together'];
-message3 = ['To meet your parents :s',
-			"To your friend's wedding",
-			'To love you even more',
-			'To have a great time together',
-			'......'];
-message4 = ['...',
-			'...'];
-
-messages = {
-	message1: message1[Math.floor(Math.random() * (message1.length - 1) + 1)],
-	message2: message2[Math.floor(Math.random() * (message2.length - 1) + 1)],
-	message3: message3[Math.floor(Math.random() * (message3.length - 1) + 1)],
-	message4: message4[Math.floor(Math.random() * (message4.length - 1) + 1)],
-}
-
-today = new Date();
-tday1 = new Date(today.getFullYear(),travelday1[1]-1,travelday1[0],travelday1[2]);
-tday2 = new Date(today.getFullYear(),travelday2[1]-1,travelday2[0],travelday2[2]);
-tday3 = new Date(today.getFullYear(),travelday3[1]-1,travelday3[0],travelday3[2]);
-tday4 = new Date(today.getFullYear()+1,travelday4[1]-1,travelday4[0],travelday4[2]);
-
-diff1 = tday1.getTime()-today.getTime();
-diff2 = tday2.getTime()-today.getTime();
-diff3 = tday3.getTime()-today.getTime();
-diff4 = tday4.getTime()-today.getTime();
-
-//days = Math.floor(diff/(1000*60*60*24));
-//hours = Math.floor(diff/(1000*60*60));
-//minutes = Math.floor(diff/(1000*60));
-first_day = Math.floor(diff1/(1000));
-second_day = Math.floor(diff2/(1000));
-third_day = Math.floor(diff3/(1000));
-fourth_day = Math.floor(diff4/(1000));
-res.render('hiBeautiful',{title:" Hi Beautiful", first_day:first_day, second_day:second_day, third_day:third_day, fourth_day:fourth_day, messages:messages});
-};
 exports.deletePush = function(req,res){
 	Push.remove({app_id:req.params.app_id},function(err){
 		if(err){
